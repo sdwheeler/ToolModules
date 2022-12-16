@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-WmiHelp</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>WmiHelp</command:noun>
+      <maml:description>
+        <maml:para>Creates help documentation for WMI classes in structured markdown files.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Creates help documentation for WMI classes in structured markdown files. By default, this cmdlet creates markdown files for each WMI class and its methods within the target namespace. Optionally, you can target a specific class using the TargetClass parameter.</maml:para>
+      <maml:para>The cmdlet creates the markdown files using the following name patterns:</maml:para>
+      <maml:para>- `&lt;classname&gt;.md`</maml:para>
+      <maml:para>- `&lt;classname&gt;-&lt;methodname&gt;-method.md`</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-WmiHelp</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Namespace</maml:name>
+          <maml:description>
+            <maml:para>Specifies the WMI namespace to be documented. The default namespace is `root\cimv2`</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Root\cimv2</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>OutputPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the folder location to write the markdown files. Default location is the current folder.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>.\</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>CreateValueTables</maml:name>
+          <maml:description>
+            <maml:para>When this parameter is provided, value-type qualifiers are displayed as tables or lists. The supported value types are:</maml:para>
+            <maml:para>- Values</maml:para>
+            <maml:para>- ValueMap</maml:para>
+            <maml:para>- BitValues</maml:para>
+            <maml:para>- BitMap</maml:para>
+            <maml:para>- Enumeration</maml:para>
+            <maml:para>- Bits</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeInventoryClasses</maml:name>
+          <maml:description>
+            <maml:para>By default, this cmdlet does not output documentation for SCCM inventory classes. Using this parameter includes the inventory classes.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludePropertyTable</maml:name>
+          <maml:description>
+            <maml:para>When this parameter is used, the cmdlet creates a hyperlinked list of property names for the class.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Metadata</maml:name>
+          <maml:description>
+            <maml:para>Use this to pass a hash table of metadata key/value pairs. This metadata is written as YAML frontmatter in every markdown file. By default, the cmdlet creates the following metadata:</maml:para>
+            <maml:para>- description</maml:para>
+            <maml:para>- ms.date</maml:para>
+            <maml:para>- title</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Collections.Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TargetClass</maml:name>
+          <maml:description>
+            <maml:para>Specifies the WMI class to document. The class must exist within the target namespace.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>CreateValueTables</maml:name>
+        <maml:description>
+          <maml:para>When this parameter is provided, value-type qualifiers are displayed as tables or lists. The supported value types are:</maml:para>
+          <maml:para>- Values</maml:para>
+          <maml:para>- ValueMap</maml:para>
+          <maml:para>- BitValues</maml:para>
+          <maml:para>- BitMap</maml:para>
+          <maml:para>- Enumeration</maml:para>
+          <maml:para>- Bits</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeInventoryClasses</maml:name>
+        <maml:description>
+          <maml:para>By default, this cmdlet does not output documentation for SCCM inventory classes. Using this parameter includes the inventory classes.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludePropertyTable</maml:name>
+        <maml:description>
+          <maml:para>When this parameter is used, the cmdlet creates a hyperlinked list of property names for the class.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Management.Automation.SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Metadata</maml:name>
+        <maml:description>
+          <maml:para>Use this to pass a hash table of metadata key/value pairs. This metadata is written as YAML frontmatter in every markdown file. By default, the cmdlet creates the following metadata:</maml:para>
+          <maml:para>- description</maml:para>
+          <maml:para>- ms.date</maml:para>
+          <maml:para>- title</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Collections.Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Namespace</maml:name>
+        <maml:description>
+          <maml:para>Specifies the WMI namespace to be documented. The default namespace is `root\cimv2`</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Root\cimv2</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>OutputPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the folder location to write the markdown files. Default location is the current folder.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>.\</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TargetClass</maml:name>
+        <maml:description>
+          <maml:para>Specifies the WMI class to document. The class must exist within the target namespace.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>The cmdlet write output to the host (not the pipeline) to show progress.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1 - Create documentation for the Win32_OperatingSystem class</maml:title>
+        <dev:code>New-WmiHelp -TargetClass Win32_OperatingSystem
+dir Win32_OperatingSystem*
+
+Directory: C:\temp\WMIDocs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---            6/5/2021  2:23 PM           1328 win32_operatingsystem-reboot-method.md
+-a---            6/5/2021  2:23 PM           1407 win32_operatingsystem-setdatetime-method.md
+-a---            6/5/2021  2:23 PM           1458 win32_operatingsystem-shutdown-method.md
+-a---            6/5/2021  2:23 PM           1913 win32_operatingsystem-win32shutdown-method.md
+-a---            6/5/2021  2:23 PM           2511 win32_operatingsystem-win32shutdowntracker-method.md
+-a---            6/5/2021  2:23 PM          25140 win32_operatingsystem.md</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2 - Create documentation for the Win32_ComputerSystem class with custom metadata</maml:title>
+        <dev:code>$meta = @{
+    titleSuffix = 'Win32 Classes'
+    'ms.prod' = 'Windows Server'
+    'ms.technology' = ''
+    'ms.topic' = 'reference'
+    author = 'aczechowski'
+    'ms.author' = 'aaroncz'
+    'manager' = 'dougeby'
+}
+New-WmiHelp -TargetClass Win32_ComputerSystem -Metadata $meta</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-WmiHelpToc</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>WmiHelpToc</command:noun>
+      <maml:description>
+        <maml:para>Creates a toc.yaml files for all markdown files in a folder.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Creates a `toc.yaml` files for all markdown files in a folder. Each class file will be a node in the TOC. If a class has methods, the class and methods files are listed in a subnode of the class.</maml:para>
+      <maml:para>The contents of this `toc.yaml` file is meant to be copied and inserted in a larger TOC for your docset. By default, all nodes in the TOC start at the root level (no indentation) and all file paths (href) only list the filename (no directory path).</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-WmiHelpToc</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>SourcePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the location where the to find the markdown files. The default is the current folder.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>OutputPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the location where the `toc.yaml` file is written. The default is the current folder.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>StartDepth</maml:name>
+          <maml:description>
+            <maml:para>This parameter is used to indent the contents of the `toc.yaml` file. For example, if you intend to insert these TOC entries in an existing TOC at a point that is 2 nodes deep, specify a StartDepth of 2.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TocBasePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a string to be added as a prefix to the filename in the TOC. No validation is done on this value. You must use correct path syntax for your docset.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>OutputPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the location where the `toc.yaml` file is written. The default is the current folder.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>SourcePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the location where the to find the markdown files. The default is the current folder.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>StartDepth</maml:name>
+        <maml:description>
+          <maml:para>This parameter is used to indent the contents of the `toc.yaml` file. For example, if you intend to insert these TOC entries in an existing TOC at a point that is 2 nodes deep, specify a StartDepth of 2.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TocBasePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a string to be added as a prefix to the filename in the TOC. No validation is done on this value. You must use correct path syntax for your docset.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.IO.FileInfo</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------- Example 1 - Create a TOC for a set of markdown --------</maml:title>
+        <dev:code>New-WmiHelpToc -SourcePath c:\temp\WMIDocs -OutputPath c:\temp\WMIDocs</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2 - Create a TOC for a set of markdown with a base file path</maml:title>
+        <dev:code>New-WmiHelpToc -SourcePath c:\temp\WMIDocs -OutputPath c:\temp\WMIDocs -TocBasePath 'reference/win32'
+Get-Content toc.yaml
+
+Directory: C:\temp\WMIDocs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---            6/5/2021  7:03 PM           1619 toc.yml
+
+- name: Win32_ComputerSystem class
+  items:
+  - name: Win32_ComputerSystem class
+    href: reference/win32/win32_computersystem.md
+  - name: JoinDomainOrWorkgroup() method of Win32_ComputerSystem class
+    href: reference/win32/win32_computersystem-joindomainorworkgroup-method.md
+  - name: Rename() method of Win32_ComputerSystem class
+    href: reference/win32/win32_computersystem-rename-method.md
+  - name: SetPowerState() method of Win32_ComputerSystem class
+    href: reference/win32/win32_computersystem-setpowerstate-method.md
+  - name: UnjoinDomainOrWorkgroup() method of Win32_ComputerSystem class
+    href: reference/win32/win32_computersystem-unjoindomainorworkgroup-method.md
+- name: Win32_OperatingSystem class
+  items:
+  - name: Win32_OperatingSystem class
+    href: reference/win32/win32_operatingsystem.md
+  - name: Reboot() method of Win32_OperatingSystem class
+    href: reference/win32/win32_operatingsystem-reboot-method.md
+  - name: SetDateTime() method of Win32_OperatingSystem class
+    href: reference/win32/win32_operatingsystem-setdatetime-method.md
+  - name: Shutdown() method of Win32_OperatingSystem class
+    href: reference/win32/win32_operatingsystem-shutdown-method.md
+  - name: Win32Shutdown() method of Win32_OperatingSystem class
+    href: reference/win32/win32_operatingsystem-win32shutdown-method.md
+  - name: Win32ShutdownTracker() method of Win32_OperatingSystem class
+    href: reference/win32/win32_operatingsystem-win32shutdowntracker-method.md</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+</helpItems>
