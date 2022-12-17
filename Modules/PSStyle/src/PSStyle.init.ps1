@@ -1,1 +1,1 @@
-﻿using module ./PSStyle.psm1
+﻿using module .\PSStyle.psm1
