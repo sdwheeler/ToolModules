@@ -43,12 +43,12 @@ docs.microsoft.com articles.
     PrivateData       = @{
         PSData = @{
             # Tags = @()
-            LicenseUri = 'https://github.com/sdwheeler/DocsTools/LICENSE'
-            ProjectUri = 'https://github.com/sdwheeler/DocsTools'
+            LicenseUri = 'https://github.com/sdwheeler/ToolModules/blob/main/LICENSE'
+            ProjectUri = 'https://github.com/sdwheeler/ToolModules/tree/main/Modules/DocsHelpers'
             # IconUri = ''
-            ReleaseNotes = 'https://github.com/sdwheeler/DocsTools/CHANGELOG.md'
+            ReleaseNotes = 'https://github.com/sdwheeler/ToolModules/tree/main/Modules/DocsHelpers/CHANGELOG.md'
             # Prerelease = ''
-            # RequireLicenseAcceptance = $false
+            RequireLicenseAcceptance = $false
             # ExternalModuleDependencies = @()
         } # End of PSData hashtable
     } # End of PrivateData hashtable
