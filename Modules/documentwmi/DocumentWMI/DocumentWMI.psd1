@@ -12,8 +12,8 @@
         PSData = @{
             Tags = @('WMI', 'Docs', 'markdown')
             LicenseUri = 'https://github.com/sdwheeler/ToolModules/blob/main/LICENSE'
-            ProjectUri = 'https://github.com/sdwheeler/ToolModules/tree/main/Modules/documentwmi'
-            ReleaseNotes = 'https://github.com/sdwheeler/ToolModules/blob/main/Modules/documentwmi/README.md'
+            ProjectUri = 'https://github.com/sdwheeler/ToolModules/tree/main/Modules/DocumentWMI'
+            ReleaseNotes = 'https://github.com/sdwheeler/ToolModules/blob/main/Modules/DocumentWMI/README.md'
             RequireLicenseAcceptance = $false
             Prerelease = 'beta1'
             # IconUri = ''          # A URL to an icon representing this module.
