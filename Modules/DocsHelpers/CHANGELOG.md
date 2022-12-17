@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.9 - 17-Dec-2022
+
+- Moved code to a new repo - no functional changes
+
 ## v1.0.8 - 15-Sep-2022
 
 - Added **original_content_git_url** property to the output of `Get-LocaleFreshness`

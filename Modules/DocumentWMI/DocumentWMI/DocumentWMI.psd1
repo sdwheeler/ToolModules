@@ -1,5 +1,5 @@
 @{
-    ModuleVersion     = '0.1.0'
+    ModuleVersion     = '0.1.1'
     GUID              = 'adac1e12-d8aa-4806-bd3a-3531bab1978e'
     Author            = 'Microsoft Corporation'
     CompanyName       = 'Microsoft Corporation'
