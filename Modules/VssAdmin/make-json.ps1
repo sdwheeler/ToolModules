@@ -1,8 +1,5 @@
-# Create an empty configuration object
-$NewConfiguration = [ordered]@{
-    '$schema' = 'https://aka.ms/PowerShell/Crescendo/Schemas/2021-11'
-    Commands = @()
-}
+# Create an empty Command list
+$Commands = @()
 
 ## Create first Crescendo command and set its properties
 $cmdlet = @{
@@ -34,7 +31,7 @@ $handler.Handler = 'ParseProvider'
 $newCommand.OutputHandlers += $handler
 
 ## Add the command to the Commands collection of the configuration
-$NewConfiguration.Commands += $newCommand
+$Commands += $newCommand
 
 ## Create second Crescendo command and set its properties
 $cmdlet = @{
@@ -112,8 +109,8 @@ $handler.Handler = 'ParseShadow'
 $newCommand.OutputHandlers += $handler
 
 ## Add the command to the Commands collection of the configuration
-$NewConfiguration.Commands += $newCommand
+$Commands += $newCommand
 
 # Export the configuration to a JSON file and create the module
-$NewConfiguration | ConvertTo-Json -Depth 5 | Out-File .\vssadmin.json -Force
-Export-CrescendoModule -ConfigurationFile vssadmin.json -ModuleName .\vssadmin.psm1 -Force
+Export-CrescendoCommand -command $Commands -fileName .\VssAdmin.crescendo.v1.1.config.json -Force
+#Export-CrescendoModule -ConfigurationFile VssAdmin.crescendo.v1.1.config.json -ModuleName .\out\module\VssAdmin.psm1 -Force

@@ -11,9 +11,9 @@
     PrivateData       = @{
         PSData = @{
             Tags = @('WMI', 'Docs', 'markdown')
-            LicenseUri = 'https://github.com/microsoft/documentwmi/blob/main/LICENSE'
-            ProjectUri = 'https://github.com/microsoft/documentwmi'
-            ReleaseNotes = 'https://github.com/microsoft/documentwmi/blob/main/LICENSE'
+            LicenseUri = 'https://github.com/sdwheeler/ToolModules/blob/main/LICENSE'
+            ProjectUri = 'https://github.com/sdwheeler/ToolModules/tree/main/Modules/documentwmi'
+            ReleaseNotes = 'https://github.com/sdwheeler/ToolModules/blob/main/Modules/documentwmi/README.md'
             RequireLicenseAcceptance = $false
             Prerelease = 'beta1'
             # IconUri = ''          # A URL to an icon representing this module.
