@@ -1,5 +1,9 @@
 # PSStyle CHANGELOG
 
+## v1.1.1 - 2023-01-04
+
+Added logic to load without error (silently) on PowerShell 7.2 and higher.
+
 ## v1.1.0 - 2023-01-04
 
 PSStyle class member parity with PowerShell 7.4-preview.1
