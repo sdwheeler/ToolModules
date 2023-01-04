@@ -76,13 +76,16 @@ class BackgroundColor {
 }
 
 class FormattingData {
-    [string]$FormatAccent = "${ESC}[32;1m"
-    [string]$TableHeader  = "${ESC}[32;1m"
-    [string]$ErrorAccent  = "${ESC}[36;1m"
-    [string]$Error        = "${ESC}[31;1m"
-    [string]$Warning      = "${ESC}[33;1m"
-    [string]$Verbose      = "${ESC}[33;1m"
-    [string]$Debug        = "${ESC}[33;1m"
+    [string]$FormatAccent           = "${ESC}[32;1m"
+    [string]$ErrorAccent            = "${ESC}[36;1m"
+    [string]$Error                  = "${ESC}[31;1m"
+    [string]$Warning                = "${ESC}[33;1m"
+    [string]$Verbose                = "${ESC}[33;1m"
+    [string]$Debug                  = "${ESC}[33;1m"
+    [string]$TableHeader            = "${ESC}[32;1m"
+    [string]$CustomTableHeaderLabel = "${ESC}[32;1;3m"
+    [string]$FeedbackProvider       = "${ESC}[33m"
+    [string]$FeedbackText           = "${ESC}[96m"
 }
 
 class ProgressConfiguration {
@@ -117,6 +120,8 @@ class PSStyle {
     [string]$Blink                    = "${ESC}[5m"
     [string]$BoldOff                  = "${ESC}[22m"
     [string]$Bold                     = "${ESC}[1m"
+    [string]$DimOff                   = "${ESC}[22m"
+    [string]$Dim                      = "${ESC}[2m"
     [string]$Hidden                   = "${ESC}[8m"
     [string]$HiddenOff                = "${ESC}[28m"
     [string]$Reverse                  = "${ESC}[7m"

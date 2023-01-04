@@ -31,6 +31,14 @@
                 <ScriptBlock>"$($_.Bold)$($_.Bold.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
               </ListItem>
               <ListItem>
+                <Label>DimOff</Label>
+                <ScriptBlock>"$($_.DimOff)$($_.DimOff.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Dim</Label>
+                <ScriptBlock>"$($_.Dim)$($_.Dim.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
                 <Label>Hidden</Label>
                 <ScriptBlock>"$($_.Hidden)$($_.Hidden.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
               </ListItem>
@@ -78,10 +86,6 @@
                 <ScriptBlock>"$($_.Formatting.FormatAccent)$($_.Formatting.FormatAccent.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
               </ListItem>
               <ListItem>
-                <Label>Formatting.TableHeader</Label>
-                <ScriptBlock>"$($_.FFormatting.TableHeader)$($_.Formatting.TableHeader.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
-              </ListItem>
-              <ListItem>
                 <Label>Formatting.ErrorAccent</Label>
                 <ScriptBlock>"$($_.Formatting.ErrorAccent)$($_.Formatting.ErrorAccent.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
               </ListItem>
@@ -100,6 +104,22 @@
               <ListItem>
                 <Label>Formatting.Debug</Label>
                 <ScriptBlock>"$($_.Formatting.Debug)$($_.Formatting.Debug.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Formatting.TableHeader</Label>
+                <ScriptBlock>"$($_.Formatting.TableHeader)$($_.Formatting.TableHeader.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Formatting.CustomTableHeaderLabel</Label>
+                <ScriptBlock>"$($_.Formatting.CustomTableHeaderLabel)$($_.Formatting.CustomTableHeaderLabel.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Formatting.FeedbackProvider</Label>
+                <ScriptBlock>"$($_.Formatting.FeedbackProvider)$($_.Formatting.FeedbackProvider.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Formatting.FeedbackText</Label>
+                <ScriptBlock>"$($_.Formatting.FeedbackText)$($_.Formatting.FeedbackText.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
               </ListItem>
               <ListItem>
                 <Label>Foreground.Black</Label>
@@ -519,10 +539,6 @@
                 <ScriptBlock>"$($_.FormatAccent)$($_.FormatAccent.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
               </ListItem>
               <ListItem>
-                <Label>TableHeader</Label>
-                <ScriptBlock>"$($_.TableHeader)$($_.TableHeader.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
-              </ListItem>
-              <ListItem>
                 <Label>ErrorAccent</Label>
                 <ScriptBlock>"$($_.ErrorAccent)$($_.ErrorAccent.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
               </ListItem>
@@ -541,6 +557,22 @@
               <ListItem>
                 <Label>Debug</Label>
                 <ScriptBlock>"$($_.Debug)$($_.Debug.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>TableHeader</Label>
+                <ScriptBlock>"$($_.TableHeader)$($_.TableHeader.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>CustomTableHeaderLabel</Label>
+                <ScriptBlock>"$($_.CustomTableHeaderLabel)$($_.CustomTableHeaderLabel.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>FeedbackProvider</Label>
+                <ScriptBlock>"$($_.FeedbackProvider)$($_.FeedbackProvider.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>FeedbackText</Label>
+                <ScriptBlock>"$($_.FeedbackText)$($_.FeedbackText.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
               </ListItem>
             </ListItems>
           </ListEntry>
