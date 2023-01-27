@@ -1,4 +1,10 @@
-param ( [switch]$publish, [switch]$test, [switch]$package, [switch]$clean )
+param(
+    [switch]$publish,
+    [switch]$test,
+    [switch]$package,
+    [switch]$clean,
+    [switch]$gallery
+)
 $moduleName = "PSStyle"
 $psd = Import-PowerShellDataFile "$PSScriptRoot/src/${moduleName}.psd1"
 $moduleVersion = $psd.ModuleVersion
@@ -42,5 +48,11 @@ if ( $package ) {
     finally {
         Unregister-PSRepository -Name $repoName
     }
+}
 
+if ( $gallery ) {
+    if (-not (test-path $moduleDeploymentDir)) {
+        throw "Could not find '$moduleDeploymentDir'"
+    }
+    Publish-Module -NuGetApiKey $env:PSGALLERY_TOKEN -Path $PSScriptRoot/out/${moduleName} -Repository PSGallery
 }
