@@ -1,10 +1,4 @@
-﻿if ($PSVersionTable.PSVersion.ToString() -lt '7.2.0.0') {
-    . ./PSStyle.init.ps1
-} else {
-    return
-}
-
-$ESC = [char]0x1b
+﻿$ESC = [char]0x1b
 
 enum OutputRendering {
     Host
