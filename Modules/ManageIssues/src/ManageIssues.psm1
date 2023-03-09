@@ -78,7 +78,7 @@ function Find-Issue {
     }
     $query = 'q=' + [System.Net.WebUtility]::UrlEncode($queryparams) + '&sort=created&order=asc&per_page=100'
 
-    $issuelist = Invoke-RestMethod "https://api.github.com/search/issues?$query" -Headers $hdr
+    $issuelist = Invoke-RestMethod "https://api.github.com/search/issues?$query" -Headers $hdr -FollwRelLink
 
     $records = @()
     $issuelist.items | ForEach-Object {
