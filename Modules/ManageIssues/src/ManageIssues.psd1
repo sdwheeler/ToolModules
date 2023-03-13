@@ -1,7 +1,7 @@
 @{
 
     RootModule        = 'ManageIssues.psm1'
-    ModuleVersion     = '1.0.0'
+    ModuleVersion     = '1.0.1'
     GUID              = 'cd79248e-2d34-4e3b-8014-ab5572b94d42'
     Author            = 'sean.wheeler@microsoft.com'
     CompanyName       = 'Microsoft'
