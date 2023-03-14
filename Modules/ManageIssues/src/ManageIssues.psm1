@@ -61,6 +61,12 @@ function Find-Issue {
         [string]$OutPath
     )
 
+    if ([string]::IsNullOrEmpty($Env:GITHUB_TOKEN) -or
+        [string]::IsNullOrEmpty($Env:GITHUB_TOKEN.trim())) {
+        $PSCmdlet.ThrowTerminatingError('GitHub personal access token not found.' +
+        ' store your token in the $Env:GITHUB_TOKEN environment variable.')
+    }
+
     $hdr = @{
         Accept        = 'application/vnd.github.raw+json'
         Authorization = "token ${Env:\GITHUB_TOKEN}"
@@ -78,7 +84,16 @@ function Find-Issue {
     }
     $query = 'q=' + [System.Net.WebUtility]::UrlEncode($queryparams) + '&sort=created&order=asc&per_page=100'
 
-    $issuelist = Invoke-RestMethod "https://api.github.com/search/issues?$query" -Headers $hdr -FollowRelLink
+    try {
+        $issuelist = Invoke-RestMethod "https://api.github.com/search/issues?$query" -Headers $hdr -FollowRelLink
+    } catch {
+        if (($_.ErrorDetails.Message | ConvertFrom-Json).message -match 'Validation failed') {
+            $PSCmdlet.ThrowTerminatingError('Make sure your access token has been configured ' +
+            'for SSO with the target orge (MicrosoftDocs).')
+        } else {
+            $PSCmdlet.ThrowTerminatingError($_.Exception.Message)
+        }
+    }
 
     $records = @()
     $issuelist.items | ForEach-Object {
