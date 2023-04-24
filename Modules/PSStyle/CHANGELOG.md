@@ -1,5 +1,11 @@
 # PSStyle CHANGELOG
 
+## v1.1.1 - 2023-04-24
+
+Moved the PSStyle class definition to a separate file.
+
+- Improves information shown by `Get-Module`
+
 ## v1.1.1 - 2023-01-04
 
 Added logic to load without error (silently) on PowerShell 7.2 and higher.
