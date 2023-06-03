@@ -30,12 +30,10 @@ class ForegroundColor {
     [string]$BrightYellow  = "${ESC}[93m"
 
     [string]FromRGB ([byte]$r, [byte]$g, [byte]$b) {
-        $ESC = [char]0x1b
         return "${ESC}[38;2;${r};${g};${b}m"
     }
 
     [string]FromRGB ([uint32]$rgb) {
-        $ESC = [char]0x1b
         [byte]$r = ($rgb -band 0x00ff0000) -shr 16
         [byte]$g = ($rgb -band 0x0000ff00) -shr 8
         [byte]$b = ($rgb -band 0x000000ff)
@@ -62,12 +60,10 @@ class BackgroundColor {
     [string]$BrightYellow  = "${ESC}[103m"
 
     [string]FromRGB ([byte]$r, [byte]$g, [byte]$b) {
-        $ESC = [char]0x1b
         return "${ESC}[48;2;${r};${g};${b}m"
     }
 
     [string]FromRGB ([uint32]$rgb) {
-        $ESC = [char]0x1b
         [byte]$r = ($rgb -band 0x00ff0000) -shr 16
         [byte]$g = ($rgb -band 0x0000ff00) -shr 8
         [byte]$b = ($rgb -band 0x000000ff)
@@ -89,9 +85,9 @@ class FormattingData {
 }
 
 class ProgressConfiguration {
-    [string]$Style           = "${ESC}[33;1m"
-    [int]$MaxWidth           = 120
-    [ProgressView ]$View     = [ProgressView]::Minimal
+    [string]$Style         = "${ESC}[33;1m"
+    [int]$MaxWidth         = 120
+    [ProgressView ]$View   = [ProgressView]::Minimal
     [bool]$UseOSCIndicator = $false
 }
 
@@ -138,6 +134,12 @@ class PSStyle {
     [FileInfoFormatting]$FileInfo     = [FileInfoFormatting]::new()
     [ForegroundColor]$Foreground      = [ForegroundColor]::new()
     [BackgroundColor]$Background      = [BackgroundColor]::new()
+
+    [string]FormatHyperlink([string]$text, [Uri]$link) {
+        $ESC = [char]0x1b
+        return "${ESC}]8;;${link}${ESC}\${text}${ESC}]8;;${ESC}\"
+    }
+
 }
 
 

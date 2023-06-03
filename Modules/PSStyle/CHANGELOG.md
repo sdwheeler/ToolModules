@@ -1,6 +1,10 @@
 # PSStyle CHANGELOG
 
-## v1.1.1 - 2023-04-24
+## v1.1.4 - 2023-06-03
+
+Added the `FormatHyperlink()` method to the `PSStyle` class.
+
+## v1.1.3 - 2023-04-24
 
 Moved the PSStyle class definition to a separate file.
 
