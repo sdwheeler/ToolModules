@@ -30,10 +30,12 @@ class ForegroundColor {
     [string]$BrightYellow  = "${ESC}[93m"
 
     [string]FromRGB ([byte]$r, [byte]$g, [byte]$b) {
+        $ESC = [char]0x1b
         return "${ESC}[38;2;${r};${g};${b}m"
     }
 
     [string]FromRGB ([uint32]$rgb) {
+        $ESC = [char]0x1b
         [byte]$r = ($rgb -band 0x00ff0000) -shr 16
         [byte]$g = ($rgb -band 0x0000ff00) -shr 8
         [byte]$b = ($rgb -band 0x000000ff)
@@ -60,10 +62,12 @@ class BackgroundColor {
     [string]$BrightYellow  = "${ESC}[103m"
 
     [string]FromRGB ([byte]$r, [byte]$g, [byte]$b) {
+        $ESC = [char]0x1b
         return "${ESC}[48;2;${r};${g};${b}m"
     }
 
     [string]FromRGB ([uint32]$rgb) {
+        $ESC = [char]0x1b
         [byte]$r = ($rgb -band 0x00ff0000) -shr 16
         [byte]$g = ($rgb -band 0x0000ff00) -shr 8
         [byte]$b = ($rgb -band 0x000000ff)
