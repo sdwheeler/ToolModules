@@ -89,9 +89,9 @@ class FormattingData {
 }
 
 class ProgressConfiguration {
-    [string]$Style           = "${ESC}[33;1m"
-    [int]$MaxWidth           = 120
-    [ProgressView ]$View     = [ProgressView]::Minimal
+    [string]$Style         = "${ESC}[33;1m"
+    [int]$MaxWidth         = 120
+    [ProgressView ]$View   = [ProgressView]::Minimal
     [bool]$UseOSCIndicator = $false
 }
 
@@ -138,6 +138,12 @@ class PSStyle {
     [FileInfoFormatting]$FileInfo     = [FileInfoFormatting]::new()
     [ForegroundColor]$Foreground      = [ForegroundColor]::new()
     [BackgroundColor]$Background      = [BackgroundColor]::new()
+
+    [string]FormatHyperlink([string]$text, [Uri]$link) {
+        $ESC = [char]0x1b
+        return "${ESC}]8;;${link}${ESC}\${text}${ESC}]8;;${ESC}\"
+    }
+
 }
 
 
