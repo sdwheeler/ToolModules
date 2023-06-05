@@ -144,6 +144,84 @@ class PSStyle {
         return "${ESC}]8;;${link}${ESC}\${text}${ESC}]8;;${ESC}\"
     }
 
+    hidden static [string[]]$BackgroundColorMap = @(
+        "${ESC}[40m",  # Black
+        "${ESC}[44m",  # DarkBlue
+        "${ESC}[42m",  # DarkGreen
+        "${ESC}[46m",  # DarkCyan
+        "${ESC}[41m",  # DarkRed
+        "${ESC}[45m",  # DarkMagenta
+        "${ESC}[43m",  # DarkYellow
+        "${ESC}[47m",  # Gray
+        "${ESC}[100m", # DarkGray
+        "${ESC}[104m", # Blue
+        "${ESC}[102m", # Green
+        "${ESC}[106m", # Cyan
+        "${ESC}[101m", # Red
+        "${ESC}[105m", # Magenta
+        "${ESC}[103m", # Yellow
+        "${ESC}[107m"  # White
+    )
+
+    hidden static [string[]]$ForegroundColorMap = @(
+        "${ESC}[30m", # Black
+        "${ESC}[34m", # DarkBlue
+        "${ESC}[32m", # DarkGreen
+        "${ESC}[36m", # DarkCyan
+        "${ESC}[31m", # DarkRed
+        "${ESC}[35m", # DarkMagenta
+        "${ESC}[33m", # DarkYellow
+        "${ESC}[37m", # Gray
+        "${ESC}[90m", # DarkGray
+        "${ESC}[94m", # Blue
+        "${ESC}[92m", # Green
+        "${ESC}[96m", # Cyan
+        "${ESC}[91m", # Red
+        "${ESC}[95m", # Magenta
+        "${ESC}[93m", # Yellow
+        "${ESC}[97m"  # White
+    )
+
+    hidden static [string] MapColorToEscapeSequence ([ConsoleColor]$color, [bool]$isBackground) {
+        $index = [int]$color
+        if ($index -lt 0 -or $index -ge [PSStyle]::ForegroundColorMap.Length) {
+            throw "Error: Color ($color) out of range."
+        }
+        if ($isBackground) {
+            return [PSStyle]::BackgroundColorMap[$index]
+        } else {
+            return [PSStyle]::ForegroundColorMap[$index]
+        }
+    }
+
+    static [string] MapForegroundColorToEscapeSequence([ConsoleColor]$foregroundColor) {
+        return [PSStyle]::MapColorToEscapeSequence($foregroundColor, $false)
+    }
+
+    static [string] MapBackgroundColorToEscapeSequence([ConsoleColor]$backgroundColor) {
+        return [PSStyle]::MapColorToEscapeSequence($backgroundColor, $false)
+    }
+
+    static [string] MapColorPairToEscapeSequence(
+        [ConsoleColor]$foregroundColor, [ConsoleColor]$backgroundColor) {
+            $foreIndex = [int]$foregroundColor
+            $backIndex = [int]$backgroundColor
+
+            if ($foreIndex -lt 0 -or $foreIndex -ge [PSStyle]::ForegroundColorMap.Length)
+            {
+                throw "Error: ForegroundColor ($foregroundColor) out of range."
+            }
+
+            if ($backIndex -lt 0 -or $backIndex -ge [PSStyle]::ForegroundColorMap.Length)
+            {
+                throw "Error: BackgroundColor ($backgroundColor) out of range."
+            }
+
+            $fgColor = [PSStyle]::ForegroundColorMap[$foreIndex];
+            $bgColor = [PSStyle]::BackgroundColorMap[$backIndex];
+
+            return "${fgColor};${bgColor}"
+        }
 }
 
 
