@@ -1,5 +1,13 @@
 # PSStyle CHANGELOG
 
+## v1.1.5 - 2023-06-05
+
+Add static methods to the `PSStyle` class
+
+- MapBackgroundColorToEscapeSequence
+- MapColorPairToEscapeSequence
+- MapForegroundColorToEscapeSequence
+
 ## v1.1.4 - 2023-06-03
 
 Added the `FormatHyperlink()` method to the `PSStyle` class.
