@@ -1,5 +1,12 @@
 # PSStyle CHANGELOG
 
+## v1.1.7 - 2023-12-15
+
+Use Type Accelerators to export classes and enums
+
+- This avoids the need to use the `using module` statement in a startup script, which adds noise
+  to the loaded module list.
+
 ## v1.1.5 - 2023-06-05
 
 Add static methods to the `PSStyle` class

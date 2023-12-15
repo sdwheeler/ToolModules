@@ -224,7 +224,3 @@ class PSStyle {
         }
 }
 
-
-$PSStyle = [PSStyle]::new()
-
-Export-ModuleMember -Variable PSStyle
