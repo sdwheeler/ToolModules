@@ -1,5 +1,9 @@
 # PSStyle CHANGELOG
 
+## v1.1.8 - 2024-04-16
+
+Fixed format definitions
+
 ## v1.1.7 - 2023-12-15
 
 Use Type Accelerators to export classes and enums

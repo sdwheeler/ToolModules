@@ -126,6 +126,10 @@
                 <ScriptBlock>"$($_.Progress.Style)$($_.Foreground.Black.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($_.Reset)"</ScriptBlock>
               </ListItem>
               <ListItem>
+                <Label>Progress.Style</Label>
+                <ScriptBlock>"$($_.Progress.Style)$($_.Progress.Style.Replace([string]([char]0x1b),'"$([char]0x1b)'))`"$($PSStyle.Reset)"</ScriptBlock>
+              </ListItem>
+              <ListItem>
                 <Label>Progress.MaxWidth</Label>
                 <ScriptBlock>"$($_.Progress.MaxWidth)"</ScriptBlock>
               </ListItem>
@@ -510,7 +514,7 @@
                       $null = $sb.Append(' = ')
                       $null = $sb.Append($_.Extension.$key)
                       $null = $sb.Append('"')
-                      $null = $sb.Append($_.Extension.$key.Replace([string]([char]0x1b),'$([char]0x1b'))
+                      $null = $sb.Append($_.Extension.$key.Replace([string]([char]0x1b),'$([char]0x1b)'))
                       $null = $sb.Append('"')
                       $null = $sb.Append($PSStyle.Reset)
                       $null = $sb.Append([Environment]::NewLine)
