@@ -1,0 +1,166 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "commands": [
+    {
+      "Verb": "Resize",
+      "Noun": "VssShadowStorage",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "Resize",
+        "ShadowStorage"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "DefaultParameterSetName": "ByMaxSize",
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "Resizes the maximum size for a shadow copy storage association between ForVolumeSpec and OnVolumeSpec. Resizing the storage association may cause shadow copies to disappear. As certain shadow copies are deleted, the shadow copy storage space will then shrink.",
+      "Usage": {
+        "Synopsis": "Resizes the maximum size for a shadow copy storage association between ForVolumeSpec and OnVolumeSpec. Resizing the storage association may cause shadow copies to disappear. As certain shadow copies are deleted, the shadow copy storage space will then shrink.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [
+        {
+          "Name": "For",
+          "OriginalName": "/For=",
+          "Description": "Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxSize",
+            "ByMaxPercent",
+            "ByMaxUnbound"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "On",
+          "OriginalName": "/On=",
+          "Description": "Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxSize",
+            "ByMaxPercent",
+            "ByMaxUnbound"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "MaxSize",
+          "OriginalName": "/MaxSize=",
+          "Description": "New maximum size in bytes. Must be 320MB or more.",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "Int64",
+          "AdditionalParameterAttributes": [
+            "[ValidateScript({$_ -ge 320MB})]"
+          ],
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxSize"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "MaxPercent",
+          "OriginalName": "/MaxPercent=",
+          "Description": "A percentage string like \u002720%\u0027.",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "AdditionalParameterAttributes": [
+            "[ValidatePattern(\u0027[0-9]\u002B%\u0027)]"
+          ],
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxPercent"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "Unbounded",
+          "OriginalName": "/MaxSize=UNBOUNDED",
+          "Description": "Sets the maximum size to UNBOUNDED.",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "switch",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxUnbound"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        }
+      ],
+      "Examples": [
+        {
+          "Command": "Resize-VssShadowStorage -For C: -On C: -MaxSize 900MB",
+          "OriginalCommand": "vssadmin resize shadowstorage /For=C: /On=C: /MaxSize=900MB",
+          "Description": "Set the new storage size to 900MB"
+        },
+        {
+          "Command": "Resize-VssShadowStorage -For C: -On C: -MaxPercent \u002720%\u0027",
+          "OriginalCommand": "vssadmin resize shadowstorage /For=C: /On=C: /MaxSize=20%",
+          "Description": "Set the new storage size to 20% of the OnVolume size"
+        },
+        {
+          "Command": "Resize-VssShadowStorage -For C: -On C: -Unbounded",
+          "OriginalCommand": "vssadmin resize shadowstorage /For=C: /On=C: /MaxSize=UNBOUNDED",
+          "Description": "Set the new storage size to unlimited"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "ByMaxSize",
+          "Handler": "ParseResizeShadowStorage",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "ByMaxPercent",
+          "Handler": "ParseResizeShadowStorage",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "ByMaxUnbound",
+          "Handler": "ParseResizeShadowStorage",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}

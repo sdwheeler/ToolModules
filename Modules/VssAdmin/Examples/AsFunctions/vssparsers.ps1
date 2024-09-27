@@ -3,27 +3,42 @@
         [Parameter(Mandatory)]
         $cmdResults
     )
-
+    # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
-    for ($i=1; $i -lt $textBlocks.Count; $i+=2) {
-        if ($textBlocks[$i] -ne '') {
+    # For each block of text, parse the lines and create a custom object
+    foreach ($block in $textBlocks) {
+        if ($block -ne '') {
             $hash = @{}
-            $kvpairs = ($textBlocks[$i] -split "`r`n").Split(':').Trim()
+            # Split the block into lines then split the lines into key/value pairs
+            $kvpairs = ($block -split "`r`n").Split(':').Trim()
 
-            for ($x = 0; $x -lt $kvpairs.Count; $x++) {
-                switch ($kvpairs[$x]) {
+            foreach ($kv in $kvpairs) {
+                switch ($kv) {
                     'Provider name' {
-                        $hash.Add('Name',$kvpairs[$x+1].Trim("'"))
+                        if ($foreach.MoveNext()) {
+                            $hash.Add('Name',$foreach.Current.Trim("'"))
+                        }
                     }
                     'Provider type' {
-                        $hash.Add('Type',$kvpairs[$x+1])
+                        if ($foreach.MoveNext()) {
+                            $hash.Add('Type',$foreach.Current)
+                        }
                     }
                     'Provider Id' {
-                        $hash.Add('Id',([guid]($kvpairs[$x+1])))
+                        if ($foreach.MoveNext()) {
+                            $hash.Add('Id',([guid]$foreach.Current))
+                        }
                     }
                     'Version' {
-                        $hash.Add('Version',[version]$kvpairs[$x+1])
+                        if ($foreach.MoveNext()) {
+                            $hash.Add('Version',[version]$foreach.Current)
+                        }
+                    }
+                    'Error' {
+                        if ($foreach.MoveNext()) {
+                            Write-Error ($block -join '')
+                        }
                     }
                 }
             }
@@ -37,12 +52,15 @@ function ParseShadow {
         [Parameter(Mandatory)]
         $cmdResults
     )
+    # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
-    for ($i=1; $i -lt $textBlocks.Count; $i++) {
-        if ($textBlocks[$i] -ne '') {
+    # For each block of text, parse the lines and create a custom object
+    foreach ($block in $textBlocks) {
+        if ($block -ne '') {
             $hash = [ordered]@{}
-            $lines = ($textBlocks[$i] -split "`r`n").Trim()
+            # Split the block into lines
+            $lines = ($block -split "`r`n").Trim()
 
             foreach ($line in $lines) {
                 switch -regex ($line) {
@@ -101,17 +119,21 @@ function ParseShadow {
     }
 }
 
+
 function ParseShadowStorage {
     param(
         [Parameter(Mandatory)]
         $cmdResults
     )
+    # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
-    for ($i=1; $i -lt $textBlocks.Count; $i++) {
-        if ($textBlocks[$i] -ne '') {
+    # For each block of text, parse the lines and create a custom object
+    foreach ($block in $textBlocks) {
+        if ($block -ne '') {
             $hash = [ordered]@{}
-            $lines = ($textBlocks[$i] -split "`r`n").Trim()
+            # Split the block into lines
+            $lines = ($block -split "`r`n").Trim()
 
             foreach ($line in $lines) {
                 switch -regex ($line) {
@@ -151,12 +173,15 @@ function ParseWriter {
         [Parameter(Mandatory)]
         $cmdResults
     )
+    # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
-    for ($i=1; $i -lt $textBlocks.Count; $i++) {
-        if ($textBlocks[$i] -ne '') {
+    # For each block of text, parse the lines and create a custom object
+    foreach ($block in $textBlocks) {
+        if ($block -ne '') {
             $hash = [ordered]@{}
-            $lines = ($textBlocks[$i] -split "`r`n").Trim()
+            # Split the block into lines
+            $lines = ($block -split "`r`n").Trim()
 
             foreach ($line in $lines) {
                 switch -regex ($line) {
@@ -191,12 +216,15 @@ function ParseVolume {
         [Parameter(Mandatory)]
         $cmdResults
     )
+    # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
-    for ($i=1; $i -lt $textBlocks.Count; $i++) {
-        if ($textBlocks[$i] -ne '') {
+    # For each block of text, parse the lines and create a custom object
+    foreach ($block in $textBlocks) {
+        if ($block -ne '') {
             $hash = [ordered]@{}
-            $lines = ($textBlocks[$i] -split "`r`n").Trim()
+            # Split the block into lines
+            $lines = ($block -split "`r`n").Trim()
 
             foreach ($line in $lines) {
                 switch -regex ($line) {
@@ -222,6 +250,7 @@ function ParseResizeShadowStorage {
         [Parameter(Mandatory)]
         $cmdResults
     )
+    # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
     if ($textBlocks[1] -like 'Error*') {
@@ -231,9 +260,9 @@ function ParseResizeShadowStorage {
     } else {
         $textBlocks[1]
     }
-
 }
 
+# Tests commands
 # ParseProvider (Get-Content .\native-output\providers.txt -Raw)
 # ParseShadow (Get-Content .\native-output\shadows.txt -Raw)
 # ParseShadowStorage (Get-Content .\native-output\shadowstorage.txt -Raw)

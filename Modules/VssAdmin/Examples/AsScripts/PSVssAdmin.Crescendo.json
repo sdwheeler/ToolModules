@@ -1,0 +1,488 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "Commands": [
+    {
+      "Verb": "Get",
+      "Noun": "VssProvider",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "providers"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "Elevation": {
+        "Command": "sudo"
+      },
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List registered volume shadow copy providers",
+      "Usage": {
+        "Synopsis": "List registered volume shadow copy providers",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [],
+      "Examples": [
+        {
+          "Command": "Get-VssProvider",
+          "OriginalCommand": "vssadmin list providers",
+          "Description": "Get a list of VSS Providers"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "./ParseProvider.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        }
+      ]
+    },
+    {
+      "Verb": "Get",
+      "Noun": "VssShadow",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "shadows"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "DefaultParameterSetName": "Default",
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List existing volume shadow copies. Without any options, all shadow copies on the system are displayed ordered by shadow copy set. Combinations of options can be used to refine the output.",
+      "Usage": {
+        "Synopsis": "List existing volume shadow copies.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [
+        {
+          "Name": "For",
+          "OriginalName": "/For=",
+          "Description": "List the shadow copies for volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "Default",
+            "ByShadowId",
+            "BySetId"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "Shadow",
+          "OriginalName": "/Shadow=",
+          "Description": "List shadow copies matching the Id in GUID format: \u0027{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": true,
+          "ParameterSetName": [
+            "ByShadowId"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "Set",
+          "OriginalName": "/Set=",
+          "Description": "List shadow copies matching the shadow set Id in GUID format: \u0027{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": true,
+          "ParameterSetName": [
+            "BySetId"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        }
+      ],
+      "Examples": [
+        {
+          "Command": "Get-VssShadow",
+          "OriginalCommand": "vssadmin list shadows",
+          "Description": "Get a list of VSS shadow copies"
+        },
+        {
+          "Command": "Get-VssShadow -For C:",
+          "OriginalCommand": "vssadmin list shadows /For=C:",
+          "Description": "Get a list of VSS shadow copies for volume C:"
+        },
+        {
+          "Command": "Get-VssShadow -Shadow \u0027{c17ebda1-5da3-4f4a-a3dc-f5920c30ed0f}",
+          "OriginalCommand": "vssadmin list shadows /Shadow={3872a791-51b6-4d10-813f-64b4beb9f935}",
+          "Description": "Get a specific shadow copy"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "./ParseShadow.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "ByShadowId",
+          "Handler": "./ParseShadow.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "BySetId",
+          "Handler": "./ParseShadow.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        }
+      ]
+    },
+    {
+      "Verb": "Get",
+      "Noun": "VssShadowStorage",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "shadowstorage"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "DefaultParameterSetName": "ForVolume",
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List volume shadow copy storage associations. With no parameters, all associations are listed by default.",
+      "Usage": {
+        "Synopsis": "List volume shadow copy storage associations. With no parameters, all associations are listed by default.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [
+        {
+          "Name": "For",
+          "OriginalName": "/For=",
+          "Description": "List all associations for a given volume. Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ForVolume"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "On",
+          "OriginalName": "/On=",
+          "Description": "List all associations on a given volume. Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "OnVolume"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        }
+      ],
+      "Examples": [
+        {
+          "Command": "Get-VssShadowStorage",
+          "OriginalCommand": "vssadmin list shadowstorage",
+          "Description": "List all associations"
+        },
+        {
+          "Command": "Get-VssShadowStorage -For C:",
+          "OriginalCommand": "vssadmin list shadowstorage /On=C:",
+          "Description": "List all associations for drive C:"
+        },
+        {
+          "Command": "Get-VssShadowStorage -On C:",
+          "OriginalCommand": "vssadmin list shadowstorage /On=C:",
+          "Description": "List all associations on drive C:"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "ForVolume",
+          "Handler": "./ParseShadowStorage.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "OnVolume",
+          "Handler": "./ParseShadowStorage.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        }
+      ]
+    },
+    {
+      "Verb": "Get",
+      "Noun": "VssVolume",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "volumes"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "Displays all volumes which may be shadow copied.",
+      "Usage": {
+        "Synopsis": "Displays all volumes which may be shadow copied.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [],
+      "Examples": [
+        {
+          "Command": "Get-VssVolume",
+          "OriginalCommand": "vssadmin list volumes",
+          "Description": "Get all volumes eligible for shadow copies."
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "./ParseVolume.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        }
+      ]
+    },
+    {
+      "Verb": "Get",
+      "Noun": "VssWriter",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "writers"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List subscribed volume shadow copy writers.",
+      "Usage": {
+        "Synopsis": "List subscribed volume shadow copy writers.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [],
+      "Examples": [
+        {
+          "Command": "Get-VssVolume",
+          "OriginalCommand": "vssadmin list writers",
+          "Description": "Get all volumes eligible for shadow copies."
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "./ParseWriter.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        }
+      ]
+    },
+    {
+      "Verb": "Resize",
+      "Noun": "VssShadowStorage",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "Resize",
+        "ShadowStorage"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "DefaultParameterSetName": "ByMaxSize",
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "Resizes the maximum size for a shadow copy storage association between ForVolumeSpec and OnVolumeSpec. Resizing the storage association may cause shadow copies to disappear. As certain shadow copies are deleted, the shadow copy storage space will then shrink.",
+      "Usage": {
+        "Synopsis": "Resizes the maximum size for a shadow copy storage association between ForVolumeSpec and OnVolumeSpec. Resizing the storage association may cause shadow copies to disappear. As certain shadow copies are deleted, the shadow copy storage space will then shrink.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [
+        {
+          "Name": "For",
+          "OriginalName": "/For=",
+          "Description": "Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxSize",
+            "ByMaxPercent",
+            "ByMaxUnbound"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "On",
+          "OriginalName": "/On=",
+          "Description": "Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxSize",
+            "ByMaxPercent",
+            "ByMaxUnbound"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "MaxSize",
+          "OriginalName": "/MaxSize=",
+          "Description": "New maximum size in bytes. Must be 320MB or more.",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "Int64",
+          "AdditionalParameterAttributes": [
+            "[ValidateScript({$_ -ge 320MB})]"
+          ],
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxSize"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "MaxPercent",
+          "OriginalName": "/MaxPercent=",
+          "Description": "A percentage string like \u002720%\u0027.",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "AdditionalParameterAttributes": [
+            "[ValidatePattern(\u0027[0-9]\u002B%\u0027)]"
+          ],
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxPercent"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "Unbounded",
+          "OriginalName": "/MaxSize=UNBOUNDED",
+          "Description": "Sets the maximum size to UNBOUNDED.",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "switch",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ByMaxUnbound"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        }
+      ],
+      "Examples": [
+        {
+          "Command": "Resize-VssShadowStorage -For C: -On C: -MaxSize 900MB",
+          "OriginalCommand": "vssadmin resize shadowstorage /For=C: /On=C: /MaxSize=900MB",
+          "Description": "Set the new storage size to 900MB"
+        },
+        {
+          "Command": "Resize-VssShadowStorage -For C: -On C: -MaxPercent \u002720%\u0027",
+          "OriginalCommand": "vssadmin resize shadowstorage /For=C: /On=C: /MaxSize=20%",
+          "Description": "Set the new storage size to 20% of the OnVolume size"
+        },
+        {
+          "Command": "Resize-VssShadowStorage -For C: -On C: -Unbounded",
+          "OriginalCommand": "vssadmin resize shadowstorage /For=C: /On=C: /MaxSize=UNBOUNDED",
+          "Description": "Set the new storage size to unlimited"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "ByMaxSize",
+          "Handler": "./ParseResizeShadowStorage.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "ByMaxPercent",
+          "Handler": "./ParseResizeShadowStorage.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "ByMaxUnbound",
+          "Handler": "./ParseResizeShadowStorage.ps1",
+          "HandlerType": "Script",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}
