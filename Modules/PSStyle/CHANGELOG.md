@@ -1,5 +1,9 @@
 # PSStyle CHANGELOG
 
+## v1.1.9 - 2025-01-31
+
+Prevent noisy output when removing Type Accelerators at unload - Thanks DaRacci ([#11][11])
+
 ## v1.1.8 - 2024-04-16
 
 Fixed format definitions
@@ -8,8 +12,8 @@ Fixed format definitions
 
 Use Type Accelerators to export classes and enums
 
-- This avoids the need to use the `using module` statement in a startup script, which adds noise
-  to the loaded module list.
+- This avoids the need to use the `using module` statement in a startup script, which adds noise to
+  the loaded module list.
 
 ## v1.1.5 - 2023-06-05
 
@@ -52,3 +56,6 @@ Fixed a minor typo
 Initial release
 
 - PSStyle class member parity with PowerShell 7.3.0
+
+<!-- reference links -->
+[11]: https://github.com/sdwheeler/ToolModules/pull/11
