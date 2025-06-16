@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
-  "Commands": [
+  "commands": [
     {
       "Verb": "Get",
       "Noun": "VssProvider",
@@ -12,9 +12,6 @@
       "Platform": [
         "Windows"
       ],
-      "Elevation": {
-        "Command": "sudo"
-      },
       "SupportsShouldProcess": false,
       "SupportsTransactions": false,
       "NoInvocation": false,

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "commands": [
+    {
+      "Verb": "Get",
+      "Noun": "VssProvider",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "providers"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List registered volume shadow copy providers",
+      "Usage": {
+        "Synopsis": "List registered volume shadow copy providers",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [],
+      "Examples": [
+        {
+          "Command": "Get-VssProvider",
+          "OriginalCommand": "vssadmin list providers",
+          "Description": "Get a list of VSS Providers"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "ParseProvider",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}

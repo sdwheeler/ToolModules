@@ -1,0 +1,122 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "commands": [
+    {
+      "Verb": "Get",
+      "Noun": "VssShadow",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "shadows"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "DefaultParameterSetName": "Default",
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List existing volume shadow copies. Without any options, all shadow copies on the system are displayed ordered by shadow copy set. Combinations of options can be used to refine the output.",
+      "Usage": {
+        "Synopsis": "List existing volume shadow copies.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [
+        {
+          "Name": "For",
+          "OriginalName": "/For=",
+          "Description": "List the shadow copies for volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "Default",
+            "ByShadowId",
+            "BySetId"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "Shadow",
+          "OriginalName": "/Shadow=",
+          "Description": "List shadow copies matching the Id in GUID format: \u0027{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": true,
+          "ParameterSetName": [
+            "ByShadowId"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "Set",
+          "OriginalName": "/Set=",
+          "Description": "List shadow copies matching the shadow set Id in GUID format: \u0027{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": true,
+          "ParameterSetName": [
+            "BySetId"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        }
+      ],
+      "Examples": [
+        {
+          "Command": "Get-VssShadow",
+          "OriginalCommand": "vssadmin list shadows",
+          "Description": "Get a list of VSS shadow copies"
+        },
+        {
+          "Command": "Get-VssShadow -For C:",
+          "OriginalCommand": "vssadmin list shadows /For=C:",
+          "Description": "Get a list of VSS shadow copies for volume C:"
+        },
+        {
+          "Command": "Get-VssShadow -Shadow \u0027{c17ebda1-5da3-4f4a-a3dc-f5920c30ed0f}",
+          "OriginalCommand": "vssadmin list shadows /Shadow={3872a791-51b6-4d10-813f-64b4beb9f935}",
+          "Description": "Get a specific shadow copy"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "ParseShadow",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "ByShadowId",
+          "Handler": "ParseShadow",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "BySetId",
+          "Handler": "ParseShadow",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}

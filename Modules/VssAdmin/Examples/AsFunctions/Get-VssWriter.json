@@ -1,0 +1,42 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "commands": [
+    {
+      "Verb": "Get",
+      "Noun": "VssWriter",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "writers"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List subscribed volume shadow copy writers.",
+      "Usage": {
+        "Synopsis": "List subscribed volume shadow copy writers.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [],
+      "Examples": [
+        {
+          "Command": "Get-VssVolume",
+          "OriginalCommand": "vssadmin list writers",
+          "Description": "Get all volumes eligible for shadow copies."
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "ParseWriter",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "commands": [
+    {
+      "Verb": "Get",
+      "Noun": "VssVolume",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "volumes"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "Displays all volumes which may be shadow copied.",
+      "Usage": {
+        "Synopsis": "Displays all volumes which may be shadow copied.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [],
+      "Examples": [
+        {
+          "Command": "Get-VssVolume",
+          "OriginalCommand": "vssadmin list volumes",
+          "Description": "Get all volumes eligible for shadow copies."
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "Default",
+          "Handler": "ParseVolume",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}
