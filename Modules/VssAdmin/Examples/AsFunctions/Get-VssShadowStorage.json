@@ -1,0 +1,96 @@
+{
+  "$schema": "https://aka.ms/PowerShell/Crescendo/Schemas/2022-06",
+  "commands": [
+    {
+      "Verb": "Get",
+      "Noun": "VssShadowStorage",
+      "OriginalName": "$env:Windir/system32/vssadmin.exe",
+      "OriginalCommandElements": [
+        "list",
+        "shadowstorage"
+      ],
+      "Platform": [
+        "Windows"
+      ],
+      "DefaultParameterSetName": "ForVolume",
+      "SupportsShouldProcess": false,
+      "SupportsTransactions": false,
+      "NoInvocation": false,
+      "Description": "List volume shadow copy storage associations. With no parameters, all associations are listed by default.",
+      "Usage": {
+        "Synopsis": "List volume shadow copy storage associations. With no parameters, all associations are listed by default.",
+        "SupportsFlags": false,
+        "HasOptions": false
+      },
+      "Parameters": [
+        {
+          "Name": "For",
+          "OriginalName": "/For=",
+          "Description": "List all associations for a given volume. Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "ForVolume"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        },
+        {
+          "Name": "On",
+          "OriginalName": "/On=",
+          "Description": "List all associations on a given volume. Provide a volume name like \u0027C:\u0027",
+          "ApplyToExecutable": false,
+          "ExcludeAsArgument": false,
+          "ParameterType": "string",
+          "Mandatory": false,
+          "ParameterSetName": [
+            "OnVolume"
+          ],
+          "Position": 2147483647,
+          "OriginalPosition": 0,
+          "ValueFromPipeline": false,
+          "ValueFromPipelineByPropertyName": false,
+          "ValueFromRemainingArguments": false,
+          "NoGap": true
+        }
+      ],
+      "Examples": [
+        {
+          "Command": "Get-VssShadowStorage",
+          "OriginalCommand": "vssadmin list shadowstorage",
+          "Description": "List all associations"
+        },
+        {
+          "Command": "Get-VssShadowStorage -For C:",
+          "OriginalCommand": "vssadmin list shadowstorage /On=C:",
+          "Description": "List all associations for drive C:"
+        },
+        {
+          "Command": "Get-VssShadowStorage -On C:",
+          "OriginalCommand": "vssadmin list shadowstorage /On=C:",
+          "Description": "List all associations on drive C:"
+        }
+      ],
+      "OutputHandlers": [
+        {
+          "ParameterSetName": "ForVolume",
+          "Handler": "ParseShadowStorage",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        },
+        {
+          "ParameterSetName": "OnVolume",
+          "Handler": "ParseShadowStorage",
+          "HandlerType": "Function",
+          "StreamOutput": false
+        }
+      ]
+    }
+  ]
+}

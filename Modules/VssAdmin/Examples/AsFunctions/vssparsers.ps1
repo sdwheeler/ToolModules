@@ -52,6 +52,21 @@ function ParseShadow {
         [Parameter(Mandatory)]
         $cmdResults
     )
+
+    function DateHelper {
+        param([string]$date)
+        # Extract the default Date/Time formatting from the local computer's "Culture" settings
+        $CultureDateTimeFormat = (Get-Culture).DateTimeFormat
+        $DateFormat = $CultureDateTimeFormat.ShortDatePattern
+        $TimeFormat = $CultureDateTimeFormat.LongTimePattern
+        $DateTimeFormat = "$DateFormat $TimeFormat"
+        $DateTime = [DateTime]::ParseExact($date,
+            $DateTimeFormat,
+            [System.Globalization.DateTimeFormatInfo]::InvariantInfo,
+            [System.Globalization.DateTimeStyles]::None)
+        $DateTime
+    }
+
     # Split output into blocks of text separated by blank lines
     $textBlocks = ($cmdResults | Out-String) -split "`r`n`r`n"
 
@@ -70,7 +85,7 @@ function ParseShadow {
                         break
                     }
                     'creation time:' {
-                        $datetime = [datetime]($line -split 'time:')[1]
+                        $datetime = DateHelper ($line -split 'time:')[1].Trim()
                         $hash.Add('CreateTime',$datetime)
                         break
                     }
