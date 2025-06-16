@@ -46,4 +46,6 @@ $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     }
 }.GetNewClosure()
 
-Export-ModuleMember -Variable PSStyle
+if (-not ($PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 2)) {
+    Export-ModuleMember -Variable PSStyle
+}
