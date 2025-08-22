@@ -21,6 +21,14 @@ $TypeAcceleratorsClass = [psobject].Assembly.GetType(
 # If a type accelerator with the same name exists, throw an exception.
 $ExistingTypeAccelerators = $TypeAcceleratorsClass::Get
 foreach ($Type in $ExportableTypes) {
+    # Allow overriding if this module was the one who originally made it.
+    $LoadedType = $ExistingTypeAccelerators[$Type.FullName];
+    $Assembly = $LoadedType.Module.Assembly;
+    $LoadingFile = ($Assembly.CustomAttributes.NamedArguments | Where-Object { $_.MemberName -eq 'ScriptFile' }).TypedValue.Value;
+    if ($LoadingFile -eq $PSScriptRoot) {
+        continue;
+    }
+
     if ($Type.FullName -in $ExistingTypeAccelerators.Keys) {
         $Message = @(
             "Unable to register type accelerator '$($Type.FullName)'"
